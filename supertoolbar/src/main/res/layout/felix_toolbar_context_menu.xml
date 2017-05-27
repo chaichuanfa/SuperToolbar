@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daasuu.bl.BubbleLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        app:bl_arrowDirection="top"
+        app:bl_arrowHeight="8dp"
+        app:bl_arrowPosition="132dp"
+        app:bl_arrowWidth="10dp"
+        app:bl_bubbleColor="@color/default_context_menu_background"
+        app:bl_cornersRadius="5dp"
+        >
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/mMenuView"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            ></android.support.v7.widget.RecyclerView>
+
+</com.daasuu.bl.BubbleLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="felix_bar_font_default_color">#FFFFFF</color>
+
+    <color name="felix_bar_default_background">#000000</color>
+
+    <color name="felix_bar_default_progressbar_color">#FF4081</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+
+    <color name="default_context_menu_background">#FF1D1B1B</color>
+
+    <color name="default_context_menu_item_text_color">#FFFFFF</color>
+
+    <color name="default_context_menu_item_divider_color">#FF8F8C8C</color>
+
+</resources>

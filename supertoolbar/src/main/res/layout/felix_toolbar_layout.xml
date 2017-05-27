@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="@layout/base_felix_toolbar_layout"
+        >
+
+    <TextView
+            android:id="@+id/mLeftButton"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/felix_bar_font_default_color"
+            android:textSize="@dimen/felix_bar_title_font_size"
+            android:paddingLeft="15dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:drawablePadding="4dp"
+            android:background="@drawable/felix_button_background_selector"
+            tools:drawableLeft="@drawable/iv_back"
+            android:clickable="true"
+            tools:text="返回"
+            />
+
+    <TextView
+            android:id="@+id/mTvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/felix_bar_title_font_size"
+            android:textColor="@color/felix_bar_font_default_color"
+            tools:text="title"
+            />
+
+    <TextView
+            android:id="@+id/mRightButton"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:textColor="@color/felix_bar_font_default_color"
+            android:textSize="@dimen/felix_bar_title_font_size"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_gravity="right"
+            android:paddingRight="15dp"
+            android:drawablePadding="4dp"
+            android:background="@drawable/felix_button_background_selector"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            />
+
+    <ViewStub
+            android:id="@+id/mProgressBarStub"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_gravity="bottom"
+            android:layout="@layout/felix_toolbar_smooth_progressbar"
+            />
+</merge>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FelixToolBar">
+
+        <attr name="title_gravity">
+            <enum name="left" value="-1"/>
+            <enum name="center" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+
+        <attr name="title_color" format="color"/>
+        <attr name="title_font_size" format="dimension"/>
+        <attr name="title_text" format="string"/>
+
+        <attr name="right_button_text_color" format="color"/>
+        <attr name="right_button_text" format="string"/>
+        <attr name="right_button_text_font_size" format="dimension"/>
+
+        <attr name="left_button_text_color" format="color"/>
+        <attr name="left_button_text" format="string"/>
+        <attr name="left_button_text_font_size" format="dimension"/>
+
+        <attr name="right_button_src" format="reference"/>
+        <attr name="left_button_src" format="reference"/>
+
+        <attr name="bottom_progressbar" format="boolean"/>
+        <attr name="bottom_progressbar_color" format="color"/>
+
+    </declare-styleable>
+
+
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.felix.demo.MainActivity"
+        >
+
+    <com.felix.supertoolbar.toolbar.FelixToolBar
+            android:id="@+id/mFelixToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:title_text="SuperToolbar"
+            app:title_color="@android:color/white"
+            app:title_gravity="center"
+            app:right_button_text="@string/text_save"
+            app:left_button_text_color="@color/button_text_color_selector"
+            app:right_button_text_color="@color/button_text_color_selector"
+            app:bottom_progressbar="true"
+            app:bottom_progressbar_color="@color/colorAccent"
+            app:left_button_src="@drawable/iv_back"
+            ></com.felix.supertoolbar.toolbar.FelixToolBar>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mFelixToolBar"
+            android:onClick="startProgress"
+            android:layout_marginTop="16dp"
+            android:text="start"
+            />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/mFelixToolBar"
+            android:onClick="stopProgress"
+            android:layout_marginTop="16dp"
+            android:text="stop"
+            />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:onClick="waveSwipe"
+            android:text="waveSwipe"
+            />
+
+</RelativeLayout>
