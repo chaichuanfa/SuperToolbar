@@ -1,5 +1,7 @@
 package com.felix.supertoolbar.toolbar;
 
+import com.felix.supertoolbar.util.ScreenUtils;
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -22,4 +24,14 @@ public abstract class BaseToolbar extends FrameLayout {
             int defStyleAttr);
 
     abstract void initToolBar();
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = ScreenUtils
+                .getMeasureSize(ScreenUtils.getScreenWidth(getContext()), widthMeasureSpec);
+        int height = ScreenUtils
+                .getMeasureSize(ScreenUtils.getActionBarHeight(getContext()), heightMeasureSpec);
+        setMeasuredDimension(width, height);
+    }
 }

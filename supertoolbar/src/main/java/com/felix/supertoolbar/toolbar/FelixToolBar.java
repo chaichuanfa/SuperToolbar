@@ -11,6 +11,7 @@ import com.felix.supertoolbar.util.ScreenUtils;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,7 +32,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressDrawable;
  * Created by chaichuanfa on 17/5/26.
  */
 
-public class FelixToolBar extends BaseToolbar {
+public class FelixToolbar extends BaseToolbar {
 
     private static final int LEFT = -1;
 
@@ -39,7 +40,9 @@ public class FelixToolBar extends BaseToolbar {
 
     private static final int RIGHT = 1;
 
-    private static final int FONT_DEFAULT_SIZE = 18;
+    private static final int BUTTON_FONT_DEFAULT_SIZE = 16;
+
+    private static final int TITLE_FONT_DEFAULT_SIZE = 18;
 
     private int text_default_color;
 
@@ -71,11 +74,21 @@ public class FelixToolBar extends BaseToolbar {
 
     private int bottom_progressbar_color;
 
+    private boolean has_badge;
+
+    private int badge_background_color;
+
+    private int badge_text_color;
+
     private TextView mTvTitle;
 
     private TextView mLeftButton;
 
     private TextView mRightButton;
+
+    private TextView mTvBadgeCount;
+
+    private View mHasMessageHint;
 
     private SmoothProgressBar mSpbBottom;
 
@@ -87,16 +100,17 @@ public class FelixToolBar extends BaseToolbar {
 
     private OnClickListener mRightListener;
 
+    private boolean isHint;
 
-    public FelixToolBar(Context context) {
+    public FelixToolbar(Context context) {
         this(context, null);
     }
 
-    public FelixToolBar(Context context, AttributeSet attrs) {
+    public FelixToolbar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FelixToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public FelixToolbar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -104,36 +118,45 @@ public class FelixToolBar extends BaseToolbar {
     protected void initAttrs(@NonNull Context context, AttributeSet attrs, int defStyleAttr) {
         text_default_color = getResources().getColor(R.color.felix_bar_font_default_color);
         TypedArray a = context.getTheme()
-                .obtainStyledAttributes(attrs, R.styleable.FelixToolBar, defStyleAttr,
+                .obtainStyledAttributes(attrs, R.styleable.FelixToolbar, defStyleAttr,
                         0);
-        title_color = a.getColor(R.styleable.FelixToolBar_title_color,
+        title_color = a.getColor(R.styleable.FelixToolbar_title_color,
                 text_default_color);
         title_size = a
-                .getDimensionPixelSize(R.styleable.FelixToolBar_title_font_size, FONT_DEFAULT_SIZE);
-        title_gravity = a.getInt(R.styleable.FelixToolBar_title_gravity, CENTER);
+                .getDimensionPixelSize(R.styleable.FelixToolbar_title_font_size,
+                        TITLE_FONT_DEFAULT_SIZE);
+        title_gravity = a.getInt(R.styleable.FelixToolbar_title_gravity, CENTER);
 
-        title_text = a.getString(R.styleable.FelixToolBar_title_text);
+        title_text = a.getString(R.styleable.FelixToolbar_title_text);
 
-        right_text_color = a.getColorStateList(R.styleable.FelixToolBar_right_button_text_color);
+        right_text_color = a.getColorStateList(R.styleable.FelixToolbar_right_button_text_color);
         right_text_size = a
-                .getDimensionPixelSize(R.styleable.FelixToolBar_right_button_text_font_size,
-                        FONT_DEFAULT_SIZE);
-        right_text = a.getString(R.styleable.FelixToolBar_right_button_text);
+                .getDimensionPixelSize(R.styleable.FelixToolbar_right_button_text_font_size,
+                        BUTTON_FONT_DEFAULT_SIZE);
+        right_text = a.getString(R.styleable.FelixToolbar_right_button_text);
 
-        left_text_color = a.getColorStateList(R.styleable.FelixToolBar_left_button_text_color);
+        left_text_color = a.getColorStateList(R.styleable.FelixToolbar_left_button_text_color);
         left_text_size = a
-                .getDimensionPixelSize(R.styleable.FelixToolBar_left_button_text_font_size,
-                        FONT_DEFAULT_SIZE);
-        left_text = a.getString(R.styleable.FelixToolBar_left_button_text);
+                .getDimensionPixelSize(R.styleable.FelixToolbar_left_button_text_font_size,
+                        BUTTON_FONT_DEFAULT_SIZE);
+        left_text = a.getString(R.styleable.FelixToolbar_left_button_text);
 
-        right_button_src = a.getResourceId(R.styleable.FelixToolBar_right_button_src, 0);
+        right_button_src = a.getResourceId(R.styleable.FelixToolbar_right_button_src, 0);
 
-        left_button_src = a.getResourceId(R.styleable.FelixToolBar_left_button_src, 0);
+        left_button_src = a.getResourceId(R.styleable.FelixToolbar_left_button_src, 0);
 
-        bottom_progressbar = a.getBoolean(R.styleable.FelixToolBar_bottom_progressbar, false);
+        bottom_progressbar = a.getBoolean(R.styleable.FelixToolbar_bottom_progressbar, false);
 
-        bottom_progressbar_color = a.getColor(R.styleable.FelixToolBar_bottom_progressbar_color,
+        bottom_progressbar_color = a.getColor(R.styleable.FelixToolbar_bottom_progressbar_color,
                 getResources().getColor(R.color.felix_bar_default_progressbar_color));
+
+        has_badge = a.getBoolean(R.styleable.FelixToolbar_has_badge, false);
+
+        badge_background_color = a.getColor(R.styleable.FelixToolbar_badge_background_color,
+                getResources().getColor(R.color.default_badge_background));
+
+        badge_text_color = a.getColor(R.styleable.FelixToolbar_badge_text_color,
+                getResources().getColor(R.color.default_badge_text_color));
     }
 
     @Override
@@ -196,17 +219,25 @@ public class FelixToolBar extends BaseToolbar {
             mSpbBottom = (SmoothProgressBar) mProgressBarStub.inflate();
             mSpbBottom.setSmoothProgressDrawableColor(bottom_progressbar_color);
         }
-    }
 
+        if (has_badge) {
+            ViewStub mBadge = (ViewStub) findViewById(R.id.mBadge);
+            View rootView = mBadge.inflate();
+            mTvBadgeCount = (TextView) rootView.findViewById(R.id.mTvBadgeCount);
+            mHasMessageHint = rootView.findViewById(R.id.mHasMessageHint);
+            mTvBadgeCount.setTextColor(badge_text_color);
+            GradientDrawable gd = new GradientDrawable();
+            gd.setColor(badge_background_color);
+            gd.setCornerRadius(ScreenUtils.dip2px(15, getContext()));
+            gd.setShape(GradientDrawable.RECTANGLE);
+            mTvBadgeCount.setBackground(gd);
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int width = ScreenUtils
-                .getMeasureSize(ScreenUtils.getScreenWidth(getContext()), widthMeasureSpec);
-        int height = ScreenUtils
-                .getMeasureSize(ScreenUtils.getActionBarHeight(getContext()), heightMeasureSpec);
-        setMeasuredDimension(width, height);
+            GradientDrawable hintGD = new GradientDrawable();
+            hintGD.setColor(badge_background_color);
+            hintGD.setShape(GradientDrawable.OVAL);
+            mHasMessageHint.setBackground(hintGD);
+        }
+
     }
 
     @Override
@@ -238,7 +269,7 @@ public class FelixToolBar extends BaseToolbar {
     }
 
     private void initBubbleLayout(BubbleLayout bubbleLayout) {
-        if(mContextMenu.getBackground() != 0) {
+        if (mContextMenu.getBackground() != 0) {
             bubbleLayout.setBubbleColor(mContextMenu.getBackground());
         }
         RecyclerView recyclerView = (RecyclerView) bubbleLayout.findViewById(R.id.mMenuView);
@@ -292,6 +323,12 @@ public class FelixToolBar extends BaseToolbar {
         }
     }
 
+    public void setTitleClickListener(OnClickListener listener) {
+        if (mTvTitle != null) {
+            mTvTitle.setOnClickListener(listener);
+        }
+    }
+
     public void showProgress(boolean isShow) {
         if (mSpbBottom != null) {
             mSpbBottom.setVisibility(isShow ? VISIBLE : GONE);
@@ -333,7 +370,8 @@ public class FelixToolBar extends BaseToolbar {
         }
     }
 
-    public void registerRightButtonContextMenu(ContextMenu menu, OnMenuItemClickCallback mCallback) {
+    public void registerRightButtonContextMenu(ContextMenu menu,
+            OnMenuItemClickCallback mCallback) {
         mContextMenu = menu;
         this.mCallback = mCallback;
     }
@@ -341,6 +379,37 @@ public class FelixToolBar extends BaseToolbar {
     public void unRegisterRightButtonContexMenu() {
         mContextMenu = null;
         mCallback = null;
+    }
+
+    public void setHasMessageHint(boolean isHint) {
+        if (mHasMessageHint != null && mTvBadgeCount != null) {
+            if (isHint && mTvBadgeCount.getVisibility() != VISIBLE) {
+                mHasMessageHint.setVisibility(VISIBLE);
+            } else {
+                mHasMessageHint.setVisibility(GONE);
+            }
+            this.isHint = isHint;
+        }
+    }
+
+    /**
+     * 当count大于99时,显示99+
+     */
+    public void setBadgeCount(int count) {
+        if (mHasMessageHint != null && mTvBadgeCount != null) {
+            if (count <= 0) {
+                mTvBadgeCount.setVisibility(GONE);
+                setHasMessageHint(isHint);
+            } else if (count > 99) {
+                mHasMessageHint.setVisibility(GONE);
+                mTvBadgeCount.setVisibility(VISIBLE);
+                mTvBadgeCount.setText("99+");
+            } else {
+                mHasMessageHint.setVisibility(GONE);
+                mTvBadgeCount.setVisibility(VISIBLE);
+                mTvBadgeCount.setText(String.valueOf(count));
+            }
+        }
     }
 
 }

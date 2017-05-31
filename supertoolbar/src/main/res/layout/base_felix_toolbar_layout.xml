@@ -10,4 +10,8 @@
     <include layout="@layout/felix_toolbar_layout"/>
 
 
+
+    <include layout="@layout/felix_search_toolbar_layout"/>
+
+
 </FrameLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="15dp"
+        android:minHeight="15dp"
+        >
+
+    <TextView
+            android:id="@+id/mTvBadgeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:maxWidth="50dp"
+            style="@style/FelixToolbarBadgeStyle"
+            tools:visibility="gone"
+            tools:text="9"
+            />
+
+    <View
+            android:id="@+id/mHasMessageHint"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:background="@drawable/felix_badge_red_bg"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+
+</RelativeLayout>

@@ -15,4 +15,8 @@
 
     <color name="default_context_menu_item_divider_color">#FF8F8C8C</color>
 
+    <color name="default_badge_background">#f63c2a</color>
+
+    <color name="default_badge_text_color">#FFFFFF</color>
+
 </resources>

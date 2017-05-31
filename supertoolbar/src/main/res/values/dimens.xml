@@ -4,6 +4,8 @@
 
     <dimen name="felix_bar_title_font_size">18sp</dimen>
 
+    <dimen name="felix_bar_button_font_size">16sp</dimen>
+
     <dimen name="felix_bar_menu_font_size">15sp</dimen>
 
 </resources>
