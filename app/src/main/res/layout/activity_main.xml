@@ -13,8 +13,9 @@
             android:id="@+id/mFelixToolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="#364582"
             app:title_text="标题标题标题标题标题标题"
+            app:title_font_size="18sp"
             app:title_color="@android:color/white"
             app:title_gravity="center"
             app:left_button_text_color="@color/button_text_color_selector"
@@ -22,8 +23,8 @@
             app:bottom_progressbar="true"
             app:bottom_progressbar_color="@color/colorAccent"
             app:left_button_src="@drawable/iv_back"
-            app:right_button_src="@mipmap/icon_add"
-            app:has_badge="true"
+            app:has_divider="true"
+            app:divider_color="@color/colorAccent"
             ></com.felix.supertoolbar.toolbar.FelixToolbar>
 
     <TextView

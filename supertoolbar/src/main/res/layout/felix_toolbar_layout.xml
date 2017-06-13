@@ -15,10 +15,8 @@
             android:paddingLeft="15dp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:foreground="?android:attr/selectableItemBackground"
             android:drawablePadding="4dp"
             android:background="@drawable/felix_button_background_selector"
-            android:clickable="true"
             tools:drawableLeft="@drawable/iv_back"
             />
 
@@ -49,8 +47,6 @@
             android:paddingRight="15dp"
             android:drawablePadding="4dp"
             android:background="@drawable/felix_button_background_selector"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
             tools:text="顶顶顶"
             />
 
@@ -62,6 +58,14 @@
             android:layout_marginTop="6dp"
             android:layout_marginRight="6dp"
             android:layout="@layout/felix_toolbar_badge"
+            />
+
+    <ViewStub
+            android:id="@+id/mDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_gravity="bottom"
+            android:layout="@layout/felix_toolbar_bottom_divider"
             />
 
     <ViewStub

@@ -9,7 +9,6 @@ public final class KeyboardUtil {
     private KeyboardUtil() {
     }
 
-
     public static void hideSoftInput(View paramEditText, Context mContext) {
         ((InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(paramEditText.getWindowToken(), 0);

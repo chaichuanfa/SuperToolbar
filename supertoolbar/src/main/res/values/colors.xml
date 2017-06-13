@@ -19,4 +19,7 @@
 
     <color name="default_badge_text_color">#FFFFFF</color>
 
+
+    <color name="default_divider_color">#50000000</color>
+
 </resources>

@@ -18,6 +18,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,10 @@ public class FelixToolbar extends BaseToolbar {
 
     private int badge_text_color;
 
+    private boolean has_divider;
+
+    private int divider_color;
+
     private TextView mTvTitle;
 
     private TextView mLeftButton;
@@ -122,23 +127,23 @@ public class FelixToolbar extends BaseToolbar {
                         0);
         title_color = a.getColor(R.styleable.FelixToolbar_title_color,
                 text_default_color);
-        title_size = a
-                .getDimensionPixelSize(R.styleable.FelixToolbar_title_font_size,
-                        TITLE_FONT_DEFAULT_SIZE);
+        title_size = (int) a
+                .getDimension(R.styleable.FelixToolbar_title_font_size,
+                        ScreenUtils.sp2px(TITLE_FONT_DEFAULT_SIZE, context));
         title_gravity = a.getInt(R.styleable.FelixToolbar_title_gravity, CENTER);
 
         title_text = a.getString(R.styleable.FelixToolbar_title_text);
 
         right_text_color = a.getColorStateList(R.styleable.FelixToolbar_right_button_text_color);
-        right_text_size = a
-                .getDimensionPixelSize(R.styleable.FelixToolbar_right_button_text_font_size,
-                        BUTTON_FONT_DEFAULT_SIZE);
+        right_text_size = (int) a
+                .getDimension(R.styleable.FelixToolbar_right_button_text_font_size,
+                        ScreenUtils.sp2px(BUTTON_FONT_DEFAULT_SIZE, context));
         right_text = a.getString(R.styleable.FelixToolbar_right_button_text);
 
         left_text_color = a.getColorStateList(R.styleable.FelixToolbar_left_button_text_color);
-        left_text_size = a
-                .getDimensionPixelSize(R.styleable.FelixToolbar_left_button_text_font_size,
-                        BUTTON_FONT_DEFAULT_SIZE);
+        left_text_size = (int) a
+                .getDimension(R.styleable.FelixToolbar_left_button_text_font_size,
+                        ScreenUtils.sp2px(BUTTON_FONT_DEFAULT_SIZE, context));
         left_text = a.getString(R.styleable.FelixToolbar_left_button_text);
 
         right_button_src = a.getResourceId(R.styleable.FelixToolbar_right_button_src, 0);
@@ -157,6 +162,11 @@ public class FelixToolbar extends BaseToolbar {
 
         badge_text_color = a.getColor(R.styleable.FelixToolbar_badge_text_color,
                 getResources().getColor(R.color.default_badge_text_color));
+
+        has_divider = a.getBoolean(R.styleable.FelixToolbar_has_divider, false);
+
+        divider_color = a.getColor(R.styleable.FelixToolbar_divider_color,
+                getResources().getColor(R.color.default_divider_color));
     }
 
     @Override
@@ -165,7 +175,7 @@ public class FelixToolbar extends BaseToolbar {
         mTvTitle = (TextView) findViewById(R.id.mTvTitle);
         mTvTitle.setText(title_text);
         mTvTitle.setTextColor(title_color);
-        mTvTitle.setTextSize(title_size);
+        mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, title_size);
         switch (title_gravity) {
             case LEFT:
                 mTvTitle.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
@@ -190,7 +200,7 @@ public class FelixToolbar extends BaseToolbar {
                 mLeftButton.setTextColor(text_default_color);
             }
 
-            mLeftButton.setTextSize(left_text_size);
+            mLeftButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, left_text_size);
         }
 
         mRightButton = (TextView) findViewById(R.id.mRightButton);
@@ -204,15 +214,19 @@ public class FelixToolbar extends BaseToolbar {
             } else {
                 mRightButton.setTextColor(text_default_color);
             }
-            mRightButton.setTextSize(right_text_size);
+            mRightButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, right_text_size);
         }
 
-        mRightButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rightButtonClick(v);
-            }
-        });
+        if (right_button_src == 0 && TextUtils.isEmpty(right_text)) {
+            mRightButton.setVisibility(GONE);
+        } else {
+            mRightButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    rightButtonClick(v);
+                }
+            });
+        }
 
         if (bottom_progressbar) {
             ViewStub mProgressBarStub = (ViewStub) findViewById(R.id.mProgressBarStub);
@@ -236,6 +250,13 @@ public class FelixToolbar extends BaseToolbar {
             hintGD.setColor(badge_background_color);
             hintGD.setShape(GradientDrawable.OVAL);
             mHasMessageHint.setBackground(hintGD);
+        }
+
+        if (has_divider) {
+            ViewStub mBadge = (ViewStub) findViewById(R.id.mDivider);
+            View divider = mBadge.inflate();
+            divider.setVisibility(VISIBLE);
+            divider.setBackgroundColor(divider_color);
         }
 
     }
