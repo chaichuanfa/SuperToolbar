@@ -224,6 +224,12 @@ public class FelixToolbar extends BaseToolbar {
 
     @Override
     protected void onDetachedFromWindow() {
+        if (mLeftButton != null) {
+            mLeftButton.setOnClickListener(null);
+        }
+        if (mRightButton != null) {
+            mRightButton.setOnClickListener(null);
+        }
         super.onDetachedFromWindow();
     }
 
