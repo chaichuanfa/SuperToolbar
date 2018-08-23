@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 
 /**
  * Created by chaichuanfa on 17/5/26.
- * 基类
  */
 
 public abstract class BaseToolbar extends FrameLayout {

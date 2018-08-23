@@ -7,4 +7,5 @@
     <color name="windowBackground">#000000</color>
     <color name="bubble_background">#369425</color>
     <color name="white">#FFFFFF</color>
+    <color name="text_color">#000000</color>
 </resources>

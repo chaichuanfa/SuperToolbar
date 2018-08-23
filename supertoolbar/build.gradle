@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 3
-        versionName "0.0.3"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.androidVersionCode
+        versionName rootProject.ext.androidVersionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -26,15 +26,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
-
-    compile 'com.hannesdorfmann.smoothprogressbar:library:1.0.0'
-
-    compile "com.jakewharton.timber:timber:4.1.2"
-
-    compile 'com.daasuu:BubbleLayout:1.1.1'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.androidSupportSdkVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.androidSupportSdkVersion}"
 }
 
 apply from: '../buildsystem/bintrayUpload.gradle'

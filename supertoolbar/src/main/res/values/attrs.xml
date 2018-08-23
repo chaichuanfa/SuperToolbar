@@ -16,47 +16,20 @@
         <attr name="right_button_text_color" format="color"/>
         <attr name="right_button_text" format="string"/>
         <attr name="right_button_text_font_size" format="dimension"/>
+        <attr name="right_button_padding_right" format="dimension"/>
 
         <attr name="left_button_text_color" format="color"/>
         <attr name="left_button_text" format="string"/>
         <attr name="left_button_text_font_size" format="dimension"/>
+        <attr name="left_button_padding_left" format="dimension"/>
 
         <attr name="right_button_src" format="reference"/>
         <attr name="left_button_src" format="reference"/>
 
-        <attr name="bottom_progressbar" format="boolean"/>
-        <attr name="bottom_progressbar_color" format="color"/>
-
-        <attr name="has_badge" format="boolean"/>
-        <attr name="badge_background_color" format="color"/>
-        <attr name="badge_text_color" format="color"/>
-
         <attr name="has_divider" format="boolean"/>
         <attr name="divider_color" format="color"/>
+        <attr name="divider_height" format="dimension"/>
 
     </declare-styleable>
-
-    <declare-styleable name="SearchToolbar">
-
-        <attr name="search_toolbar_style">
-            <enum name="left_back" value="0"/>
-            <enum name="right_text" value="1"/>
-        </attr>
-
-        <attr name="right_text_color" format="color"/>
-        <attr name="right_text_size" format="dimension"/>
-        <attr name="right_text" format="string"/>
-
-        <attr name="left_back_icon" format="reference"/>
-
-        <attr name="search_text_hint" format="string"/>
-        <attr name="search_text_hint_color" format="color"/>
-        <attr name="search_text_size" format="dimension"/>
-        <attr name="search_text_color" format="color"/>
-
-        <attr name="search_view_background" format="color"/>
-
-    </declare-styleable>
-
 
 </resources>
