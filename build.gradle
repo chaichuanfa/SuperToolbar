@@ -32,6 +32,6 @@ ext {
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
     androidSupportSdkVersion = '27.0.2'
-    androidVersionCode = 5
-    androidVersionName = "0.0.5"
+    androidVersionCode = 6
+    androidVersionName = "0.0.6"
 }

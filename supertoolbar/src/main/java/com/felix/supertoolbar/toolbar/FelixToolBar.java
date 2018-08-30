@@ -6,6 +6,8 @@ import com.felix.supertoolbar.util.ScreenUtils;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
@@ -234,6 +236,7 @@ public class FelixToolbar extends BaseToolbar {
     }
 
     private void setRightText(String text) {
+        right_text = text;
         mRightButton.setText(text);
         mRightButton.post(new Runnable() {
             @Override
@@ -290,13 +293,22 @@ public class FelixToolbar extends BaseToolbar {
 
     public void setToolBarTitle(@NonNull String title) {
         if (mTvTitle != null) {
+            title_text = title;
             mTvTitle.setText(title);
         }
     }
 
     public void setToolBarTitle(@StringRes int res) {
         if (mTvTitle != null) {
+            title_text = getResources().getString(res);
             mTvTitle.setText(res);
+        }
+    }
+
+    public void setTootBarTitleColor(@ColorInt int color) {
+        if (mTvTitle != null) {
+            title_color = color;
+            mTvTitle.setTextColor(color);
         }
     }
 
@@ -312,15 +324,45 @@ public class FelixToolbar extends BaseToolbar {
         }
     }
 
+    public void setRightButtonTextColor(ColorStateList color) {
+        if (mRightButton != null) {
+            right_text_color = color;
+            mRightButton.setTextColor(color);
+        }
+    }
+
+    public void setRightButtonResource(@DrawableRes int resource) {
+        if (mRightButton != null) {
+            right_button_src = resource;
+            mRightButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, resource, 0);
+        }
+    }
+
     public void setLeftButtonText(@StringRes int res) {
         if (mLeftButton != null) {
+            left_text = getResources().getString(res);
             mLeftButton.setText(res);
         }
     }
 
     public void setLeftButtonText(@NonNull String text) {
         if (mLeftButton != null) {
+            left_text = text;
             mLeftButton.setText(text);
+        }
+    }
+
+    public void setLeftButtonTextColor(ColorStateList color) {
+        if (mLeftButton != null) {
+            left_text_color = color;
+            mLeftButton.setTextColor(color);
+        }
+    }
+
+    public void setLeftButtonResource(@DrawableRes int resource) {
+        if (mLeftButton != null) {
+            left_button_src = resource;
+            mLeftButton.setCompoundDrawablesWithIntrinsicBounds(resource, 0, 0, 0);
         }
     }
 
